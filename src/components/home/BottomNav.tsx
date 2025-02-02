@@ -1,25 +1,25 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Platform } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useRouter, usePathname } from "expo-router";
+import { useRouter, usePathname } from 'expo-router';
 
 export const BottomNav = () => {
   const router = useRouter();
   const pathname = usePathname();
 
   const NAV_ITEMS = [
-    { icon: 'home' as keyof typeof Ionicons.glyphMap, label: 'Home', path: '/home', active: pathname === '/home' },
+    { icon: 'home' as keyof typeof Ionicons.glyphMap, label: 'Home', path: '/home' as any, active: pathname === '/home' },
     { icon: 'time-outline' as keyof typeof Ionicons.glyphMap, label: 'History' },
-    { icon: 'scan-outline' as keyof typeof Ionicons.glyphMap, label: '', isCenter: true },
+    { icon: 'scan-outline' as keyof typeof Ionicons.glyphMap, label: '', isCenter: true, onPress: () => router.push('pin-setup' as any) },
     { icon: 'chatbubble-outline' as keyof typeof Ionicons.glyphMap, label: 'Chat' },
     { 
       icon: 'person-outline' as keyof typeof Ionicons.glyphMap, 
       label: 'Profile', 
-      path: '/profile',
+      path: '/profile' as any,
       active: pathname === '/profile',
       onPress: () => {
         if (pathname !== '/profile') {
-          router.push('/profile');
+          router.push('/profile' as any);
         }
       }
     }
@@ -30,12 +30,16 @@ export const BottomNav = () => {
       {NAV_ITEMS.map((item, index) => (
         <TouchableOpacity 
           key={index} 
-          style={[styles.navItem, item.isCenter && styles.centerNav]}
-          onPress={item.onPress}
+          style={[styles.navItem, item.isCenter && styles.centerButton]}
+          onPress={item.onPress || (() => item.path && router.push(item.path))}
         >
           {item.isCenter ? (
-            <View style={styles.centerNavButton}>
-              <Ionicons name={item.icon} size={24} color="white" />
+            <View style={styles.scanButton}>
+              <Ionicons 
+                name={item.icon} 
+                size={24} 
+                color="white" 
+              />
             </View>
           ) : (
             <>
@@ -44,7 +48,10 @@ export const BottomNav = () => {
                 size={24} 
                 color={item.active ? "#4364F7" : "#C4C4C4"} 
               />
-              <Text style={[styles.navText, item.active && styles.activeText]}>
+              <Text style={[
+                styles.label,
+                item.active && styles.activeLabel
+              ]}>
                 {item.label}
               </Text>
             </>
@@ -58,11 +65,11 @@ export const BottomNav = () => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     alignItems: 'center',
+    paddingHorizontal: 20,
+    height: 80,
     backgroundColor: 'white',
-    paddingBottom: Platform.OS === 'ios' ? 25 : 15,
-    paddingTop: 15,
     borderTopWidth: 1,
     borderTopColor: '#F0F0F0',
     position: 'absolute',
@@ -73,28 +80,23 @@ const styles = StyleSheet.create({
   navItem: {
     alignItems: 'center',
   },
-  navText: {
+  centerButton: {
+    marginTop: -20,
+  },
+  scanButton: {
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    backgroundColor: '#4364F7',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  label: {
     fontSize: 12,
     color: '#C4C4C4',
     marginTop: 4,
   },
-  centerNav: {
-    marginTop: -30,
-  },
-  centerNavButton: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    backgroundColor: '#4364F7',
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowColor: '#4364F7',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4.65,
-    elevation: 8,
-  },
-  activeText: {
+  activeLabel: {
     color: '#4364F7',
   },
 }); 
