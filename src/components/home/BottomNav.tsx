@@ -1,42 +1,48 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from "expo-router";
 
-const NAV_ITEMS = [
-  { icon: 'home' as keyof typeof Ionicons.glyphMap, label: 'Home', active: true },
-  { icon: 'time-outline' as keyof typeof Ionicons.glyphMap, label: 'History' },
-  { icon: 'scan-outline' as keyof typeof Ionicons.glyphMap, label: '', isCenter: true },
-  { icon: 'chatbubble-outline' as keyof typeof Ionicons.glyphMap, label: 'Chat' },
-  { icon: 'person-outline' as keyof typeof Ionicons.glyphMap, label: 'Profile' }
-];
+export const BottomNav = () => {
+  const router = useRouter();
 
-export const BottomNav = () => (
-  <View style={styles.container}>
-    {NAV_ITEMS.map((item, index) => (
-      <TouchableOpacity 
-        key={index} 
-        style={[styles.navItem, item.isCenter && styles.centerNav]}
-      >
-        {item.isCenter ? (
-          <View style={styles.centerNavButton}>
-            <Ionicons name={item.icon} size={24} color="white" />
-          </View>
-        ) : (
-          <>
-            <Ionicons 
-              name={item.icon} 
-              size={24} 
-              color={item.active ? "#4364F7" : "#C4C4C4"} 
-            />
-            <Text style={[styles.navText, item.active && styles.activeText]}>
-              {item.label}
-            </Text>
-          </>
-        )}
-      </TouchableOpacity>
-    ))}
-  </View>
-);
+  const NAV_ITEMS = [
+    { icon: 'home' as keyof typeof Ionicons.glyphMap, label: 'Home', active: true },
+    { icon: 'time-outline' as keyof typeof Ionicons.glyphMap, label: 'History' },
+    { icon: 'scan-outline' as keyof typeof Ionicons.glyphMap, label: '', isCenter: true },
+    { icon: 'chatbubble-outline' as keyof typeof Ionicons.glyphMap, label: 'Chat' },
+    { icon: 'person-outline' as keyof typeof Ionicons.glyphMap, label: 'Profile', onPress: () => router.push("/profile") }
+  ];
+
+  return (
+    <View style={styles.container}>
+      {NAV_ITEMS.map((item, index) => (
+        <TouchableOpacity 
+          key={index} 
+          style={[styles.navItem, item.isCenter && styles.centerNav]}
+          onPress={item.onPress}
+        >
+          {item.isCenter ? (
+            <View style={styles.centerNavButton}>
+              <Ionicons name={item.icon} size={24} color="white" />
+            </View>
+          ) : (
+            <>
+              <Ionicons 
+                name={item.icon} 
+                size={24} 
+                color={item.active ? "#4364F7" : "#C4C4C4"} 
+              />
+              <Text style={[styles.navText, item.active && styles.activeText]}>
+                {item.label}
+              </Text>
+            </>
+          )}
+        </TouchableOpacity>
+      ))}
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
