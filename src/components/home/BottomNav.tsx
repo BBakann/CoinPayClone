@@ -1,17 +1,28 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useRouter } from "expo-router";
+import { useRouter, usePathname } from "expo-router";
 
 export const BottomNav = () => {
   const router = useRouter();
+  const pathname = usePathname();
 
   const NAV_ITEMS = [
-    { icon: 'home' as keyof typeof Ionicons.glyphMap, label: 'Home', active: true },
+    { icon: 'home' as keyof typeof Ionicons.glyphMap, label: 'Home', path: '/home', active: pathname === '/home' },
     { icon: 'time-outline' as keyof typeof Ionicons.glyphMap, label: 'History' },
     { icon: 'scan-outline' as keyof typeof Ionicons.glyphMap, label: '', isCenter: true },
     { icon: 'chatbubble-outline' as keyof typeof Ionicons.glyphMap, label: 'Chat' },
-    { icon: 'person-outline' as keyof typeof Ionicons.glyphMap, label: 'Profile', onPress: () => router.push("/profile") }
+    { 
+      icon: 'person-outline' as keyof typeof Ionicons.glyphMap, 
+      label: 'Profile', 
+      path: '/profile',
+      active: pathname === '/profile',
+      onPress: () => {
+        if (pathname !== '/profile') {
+          router.push('/profile');
+        }
+      }
+    }
   ];
 
   return (

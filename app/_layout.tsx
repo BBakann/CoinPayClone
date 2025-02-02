@@ -6,8 +6,8 @@ export default function RootLayout() {
     <>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
       <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="index" />
-        <Stack.Screen name="profile" />
+        <Stack.Screen name="onboarding" options={{ headerShown: false }} />
+        <Stack.Screen name="index" options={{ headerShown: false }} />
       </Stack>
     </>
   );
