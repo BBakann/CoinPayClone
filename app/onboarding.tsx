@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { useRouter } from "expo-router";
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -26,30 +26,33 @@ export default function Onboarding() {
   const router = useRouter();
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView className="flex-1 bg-white items-center justify-center px-5">
       <Image 
         source={slides[currentSlide].image} 
-        style={styles.image}
+        className="w-4/5 h-[300px] mb-[50px]"
         resizeMode="contain"
       />
       
       {/* Dots Indicator */}
-      <View style={styles.dotsContainer}>
+      <View className="flex-row mb-[30px]">
         {slides.map((_, index) => (
           <View
             key={index}
-            style={[
-              styles.dot,
-              index === currentSlide && styles.activeDot
-            ]}
+            className={`w-2 h-2 rounded-full mx-[5px] ${
+              index === currentSlide 
+                ? "bg-primary w-5" 
+                : "bg-gray-200"
+            }`}
           />
         ))}
       </View>
 
-      <Text style={styles.title}>{slides[currentSlide].title}</Text>
+      <Text className="text-[28px] font-bold text-center mb-[50px] text-gray-900 leading-9">
+        {slides[currentSlide].title}
+      </Text>
 
       <TouchableOpacity 
-        style={styles.button}
+        className="bg-primary py-4 px-8 rounded-full w-full absolute bottom-[50px]"
         onPress={() => {
           if (currentSlide < slides.length - 1) {
             setCurrentSlide(currentSlide + 1);
@@ -58,63 +61,10 @@ export default function Onboarding() {
           }
         }}
       >
-        <Text style={styles.buttonText}>
+        <Text className="text-white text-lg font-semibold text-center">
           {currentSlide === slides.length - 1 ? "Get Started" : "Next"}
         </Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: 20,
-  },
-  image: {
-    width: '80%',
-    height: 300,
-    marginBottom: 50,
-  },
-  dotsContainer: {
-    flexDirection: 'row',
-    marginBottom: 30,
-  },
-  dot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: '#E0E0E0',
-    marginHorizontal: 5,
-  },
-  activeDot: {
-    backgroundColor: '#4364F7',
-    width: 20,
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginBottom: 50,
-    color: '#1E1E1E',
-    lineHeight: 36,
-  },
-  button: {
-    backgroundColor: '#4364F7',
-    paddingVertical: 15,
-    paddingHorizontal: 30,
-    borderRadius: 30,
-    width: '100%',
-    position: 'absolute',
-    bottom: 50,
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: '600',
-    textAlign: 'center',
-  },
-}); 
+} 

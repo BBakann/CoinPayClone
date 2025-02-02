@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 const QUICK_ACTIONS = [
@@ -9,37 +9,24 @@ const QUICK_ACTIONS = [
 ];
 
 export const QuickActions = () => (
-  <View style={styles.container}>
-    {QUICK_ACTIONS.map((action, index) => (
-      <TouchableOpacity key={index} style={styles.actionItem}>
-        <View style={[styles.actionIcon, { backgroundColor: action.color }]}>
-          <Ionicons name={action.icon} size={24} color="white" />
-        </View>
-        <Text style={styles.actionText}>{action.label}</Text>
-      </TouchableOpacity>
-    ))}
+  <View className="px-5">
+    <Text className="text-lg font-semibold mb-3">Quick Actions</Text>
+    <View className="flex-row justify-between">
+      {QUICK_ACTIONS.map((action, index) => (
+        <TouchableOpacity key={index} className="items-center">
+          <View 
+            className="w-12 h-12 rounded-full justify-center items-center mb-2"
+            style={{ backgroundColor: action.color }}
+          >
+            <Ionicons 
+              name={action.icon} 
+              size={24} 
+              color="white" 
+            />
+          </View>
+          <Text className="text-sm text-gray-700">{action.label}</Text>
+        </TouchableOpacity>
+      ))}
+    </View>
   </View>
-);
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    paddingVertical: 20,
-  },
-  actionItem: {
-    alignItems: 'center',
-  },
-  actionIcon: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 8,
-  },
-  actionText: {
-    fontSize: 12,
-    color: '#333',
-  },
-}); 
+); 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { TransactionItem } from './TransactionItem';
 
@@ -11,9 +11,9 @@ const TRANSACTIONS = [
 ];
 
 export const TransactionList = () => (
-  <View style={styles.container}>
-    <View style={styles.header}>
-      <Text style={styles.title}>Transaction</Text>
+  <View className="flex-1 bg-white px-5">
+    <View className="flex-row justify-between items-center my-4">
+      <Text className="text-xl font-bold">Transaction</Text>
       <Ionicons name="chevron-forward" size={24} color="black" />
     </View>
     <ScrollView showsVerticalScrollIndicator={false}>
@@ -22,22 +22,4 @@ export const TransactionList = () => (
       ))}
     </ScrollView>
   </View>
-);
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-    paddingHorizontal: 20,
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginVertical: 15,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-}); 
+); 

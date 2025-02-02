@@ -1,27 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 export const SearchBar = () => (
-  <View style={styles.searchBar}>
+  <View className="flex-1 flex-row items-center bg-white/20 mx-4 px-4 py-2.5 rounded-3xl">
     <Ionicons name="search-outline" size={20} color="#7B7B7B" />
-    <Text style={styles.searchText}>Search "Payments"</Text>
+    <Text className="text-[#7B7B7B] ml-2.5">Search "Payments"</Text>
   </View>
-);
-
-const styles = StyleSheet.create({
-  searchBar: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    marginHorizontal: 15,
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-    borderRadius: 25,
-  },
-  searchText: {
-    color: '#7B7B7B',
-    marginLeft: 10,
-  },
-}); 
+); 

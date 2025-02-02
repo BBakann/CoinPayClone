@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
@@ -26,48 +26,47 @@ export default function PinSetup() {
   ];
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView className="flex-1 bg-white">
       {/* Header */}
-      <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
+      <TouchableOpacity className="p-5" onPress={() => router.back()}>
         <Ionicons name="chevron-back" size={24} color="#000" />
       </TouchableOpacity>
 
       {/* Title and Subtitle */}
-      <View style={styles.headerContainer}>
-        <Text style={styles.title}>Create passcode</Text>
-        <Text style={styles.subtitle}>This info needs to be accurate with your ID document.</Text>
+      <View className="px-5 mb-12">
+        <Text className="text-2xl font-bold mb-2">Create passcode</Text>
+        <Text className="text-gray-600">This info needs to be accurate with your ID document.</Text>
       </View>
 
       {/* PIN Dots */}
-      <View style={styles.dotsContainer}>
+      <View className="flex-row justify-center mb-12">
         {[...Array(4)].map((_, index) => (
           <View
             key={index}
-            style={[
-              styles.dot,
-              pin.length > index && styles.dotFilled
-            ]}
+            className={`w-3 h-3 rounded-full mx-2 ${
+              pin.length > index ? 'bg-primary' : 'bg-gray-200'
+            }`}
           />
         ))}
       </View>
 
       {/* Keypad */}
-      <View style={styles.keypad}>
+      <View className="px-5 mt-auto mb-5">
         {keypadNumbers.map((row, rowIndex) => (
-          <View key={rowIndex} style={styles.row}>
+          <View key={rowIndex} className="flex-row justify-between mb-5">
             {row.map((item, colIndex) => (
               <TouchableOpacity
                 key={colIndex}
-                style={styles.key}
+                className="w-[30%] aspect-[2/1] justify-center items-center"
                 onPress={() => item.num === 'delete' ? handleDelete() : handleNumberPress(item.num)}
                 disabled={!item.num && item.num !== 'delete'}
               >
                 {item.num === 'delete' ? (
                   <Ionicons name="backspace-outline" size={24} color="#000" />
                 ) : (
-                  <View style={styles.keyContent}>
-                    <Text style={styles.keyNumber}>{item.num}</Text>
-                    <Text style={styles.keyLetters}>{item.letters}</Text>
+                  <View className="items-center">
+                    <Text className="text-2xl font-medium">{item.num}</Text>
+                    <Text className="text-xs text-gray-500 mt-0.5">{item.letters}</Text>
                   </View>
                 )}
               </TouchableOpacity>
@@ -77,70 +76,4 @@ export default function PinSetup() {
       </View>
     </SafeAreaView>
   );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  backButton: {
-    padding: 20,
-  },
-  headerContainer: {
-    paddingHorizontal: 20,
-    marginBottom: 50,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 8,
-  },
-  subtitle: {
-    fontSize: 16,
-    color: '#666',
-  },
-  dotsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginBottom: 50,
-  },
-  dot: {
-    width: 13,
-    height: 13,
-    borderRadius: 7,
-    backgroundColor: '#E0E0E0',
-    marginHorizontal: 8,
-  },
-  dotFilled: {
-    backgroundColor: '#4364F7',
-  },
-  keypad: {
-    paddingHorizontal: 20,
-    marginTop: 'auto',
-    marginBottom: 20,
-  },
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 20,
-  },
-  key: {
-    width: '30%',
-    aspectRatio: 2,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  keyContent: {
-    alignItems: 'center',
-  },
-  keyNumber: {
-    fontSize: 24,
-    fontWeight: '500',
-  },
-  keyLetters: {
-    fontSize: 12,
-    color: '#666',
-    marginTop: 2,
-  },
-}); 
+} 

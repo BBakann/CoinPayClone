@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { SearchBar } from '../components/home/SearchBar';
@@ -10,8 +10,8 @@ import { BottomNav } from '../components/home/BottomNav';
 
 const HomePage = () => {
   return (
-    <SafeAreaView style={styles.container} edges={['bottom']}>
-      <View style={styles.header}>
+    <SafeAreaView className="flex-1 bg-primary" edges={['bottom']}>
+      <View className="flex-row items-center justify-between px-5 pt-10 mb-5">
         <TouchableOpacity>
           <Ionicons name="trophy-outline" size={24} color="white" />
         </TouchableOpacity>
@@ -28,20 +28,5 @@ const HomePage = () => {
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#4364F7',
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    paddingTop: 40,
-    marginBottom: 20,
-  },
-});
 
 export default HomePage; 

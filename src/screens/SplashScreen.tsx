@@ -4,64 +4,22 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 const SplashScreen = () => {
   return (
-    <View style={styles.container}>
+    <View className="flex-1">
       <LinearGradient
         colors={['#0052D4', '#4364F7']}
         locations={[0, 1]}
-        style={styles.gradient}
+        className="flex-1"
       >
-        <View style={styles.content}>
-          <View style={styles.logoSymbol}>
-            <View style={styles.circle1} />
-            <View style={styles.circle2} />
+        <View className="flex-1 justify-center items-center">
+          <View className="relative w-[120px] h-[120px]">
+            <View className="w-[100px] h-[100px] rounded-full bg-white absolute left-0" />
+            <View className="w-[100px] h-[100px] rounded-full bg-white absolute right-0 opacity-70" />
           </View>
-          <Text style={styles.logoText}>CoinPay</Text>
+          <Text className="text-white text-[40px] font-bold mt-5">CoinPay</Text>
         </View>
       </LinearGradient>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  gradient: {
-    flex: 1,
-  },
-  content: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  logoText: {
-    color: 'white',
-    fontSize: 40,
-    fontWeight: 'bold',
-    marginTop: 20,
-  },
-  logoSymbol: {
-    width: 120,
-    height: 120,
-    position: 'relative',
-  },
-  circle1: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    backgroundColor: 'white',
-    position: 'absolute',
-    left: 0,
-  },
-  circle2: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    backgroundColor: 'white',
-    position: 'absolute',
-    right: 0,
-    opacity: 0.7,
-  },
-});
 
 export default SplashScreen; 
