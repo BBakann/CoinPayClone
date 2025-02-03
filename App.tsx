@@ -1,10 +1,10 @@
 import React from 'react';
+import { StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { StatusBar } from 'react-native';
-import HomePage from './src/screens/HomePage';
+import HomePage from './app/home';
 import Onboarding from './app/onboarding';
-import SplashScreen from './src/screens/SplashScreen';
+import SplashScreen from './app/index';
 
 type RootStackParamList = {
   Splash: undefined;
