@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from "expo-router";
@@ -29,14 +29,16 @@ export default function Profile() {
 
       {/* Profile Card */}
       <View className="items-center p-5 mx-5 my-3 bg-white rounded-2xl shadow-sm">
-        <View className="relative">
-          <View className="w-20 h-20 rounded-full bg-secondary justify-center items-center">
-            <Text className="text-2xl font-semibold text-primary">MH</Text>
-          </View>
-          <TouchableOpacity className="absolute -right-1 bottom-0 bg-white rounded-xl p-1 shadow-sm">
-            <Ionicons name="pencil" size={20} color="#4364F7" />
-          </TouchableOpacity>
+        <View className="w-24 h-24 rounded-full bg-gray-200 overflow-hidden">
+          <Image
+            source={require('../assets/images/profile.png')}
+            className="w-full h-full"
+            resizeMode="cover"
+          />
         </View>
+        <TouchableOpacity className="absolute -right-1 bottom-0 bg-white rounded-xl p-1 shadow-sm">
+          <Ionicons name="pencil" size={20} color="#4364F7" />
+        </TouchableOpacity>
         <Text className="text-lg font-semibold mt-3">Mehedi Hasan</Text>
         <Text className="text-sm text-gray-500 mt-1">helloyouthmind@gmail.com</Text>
         <Text className="text-sm text-gray-500 mt-1">+8801995887406</Text>

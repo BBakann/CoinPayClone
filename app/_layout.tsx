@@ -12,6 +12,13 @@ export default function RootLayout() {
         <Stack.Screen name="home" />
         <Stack.Screen name="profile" />
         <Stack.Screen name="pin-setup" />
+        <Stack.Screen 
+          name="send" 
+          options={{
+            headerShown: false,
+            presentation: 'modal'
+          }}
+        />
       </Stack>
     </>
   );
